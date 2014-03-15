@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+
+    <package name="grupodopao" namespace="/" extends="struts-default">
+
+        <default-action-ref name="index" />
+
+        <global-results>
+            <result name="error">index.jsp</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+
+        <action name="login" class="br.com.clube.pao.action.LoginAction" method="execute">
+    		<result name="fail">index.jsp</result>
+    		<result name="success">WEB-INF/page/Member.jsp</result>
+    		<result name="maintain">WEB-INF/page/index.jsp</result>
+    	</action>
+    	
+    	<action name="saveMember" class="br.com.clube.pao.action.SaveMemberAction" method="execute">
+    		<result name="login">index.jsp</result>
+    		<result name="fail">WEB-INF/page/Member.jsp</result>
+    		<result name="success">WEB-INF/page/Member.jsp</result>
+    		<result name="maintain">WEB-INF/page/Maintain.jsp</result>
+    	</action>
+    	
+    	<action name="scheduleMembers" class="br.com.clube.pao.action.ScheduleMemberAction" method="execute">
+    		<result name="login">index.jsp</result>
+    		<result name="fail">WEB-INF/page/ScheduleMember.jsp</result>
+    		<result name="success" type="redirectAction">listScheduleMembers</result>
+    		<result name="maintain">WEB-INF/page/Maintain.jsp</result>
+    	</action>
+    	
+    	<action name="listScheduleMembers" class="br.com.clube.pao.action.ListScheduleMemberAction" method="execute">
+    		<result name="login">index.jsp</result>
+    		<result name="fail">WEB-INF/page/ListScheduleMember.jsp</result>
+    		<result name="success">WEB-INF/page/ListScheduleMember.jsp</result>
+    		<result name="maintain">WEB-INF/page/Maintain.jsp</result>
+    	</action>
+    	
+    	<action name="menu" class="br.com.clube.pao.action.RedirectAction" method="execute">
+    		<result name="logout">index.jsp</result>
+    		<result name="saveMember">WEB-INF/page/Member.jsp</result>
+    		<result name="scheduleMembers">WEB-INF/page/ScheduleMember.jsp</result>
+    		<result name="listScheduleMembers" type="redirectAction">listScheduleMembers</result>
+    		<result name="maintain">WEB-INF/page/Maintain.jsp</result>
+    	</action>
+    	
+    </package>
+
+</struts>
